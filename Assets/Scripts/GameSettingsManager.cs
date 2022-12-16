@@ -31,9 +31,7 @@ public class GameSettingsManager : MonoBehaviour
 		{
 			Destroy(gameObject);
 		}
-	}
 
-    void Start() {
         gameSettingProfile = defaultGameSettingProfile;
         gameSetting = new GameSetting(gameSettingProfile);
 
@@ -44,7 +42,7 @@ public class GameSettingsManager : MonoBehaviour
         masterVolume = gameSetting.masterVolume;
         musicVolume = gameSetting.musicVolume;
         sfxVolume = gameSetting.sfxVolume;
-    }
+	}
 
     void Update() {
         if(masterVolume != gameSetting.masterVolume)
@@ -61,6 +59,16 @@ public class GameSettingsManager : MonoBehaviour
         {
             SetSFXVolume(sfxVolume);
         }
+    }
+
+    public void RevertToDefault()
+    {
+        gameSetting = new GameSetting(defaultGameSettingProfile);
+        SaveGameSetting();
+
+        masterVolume = gameSetting.masterVolume;
+        musicVolume = gameSetting.musicVolume;
+        sfxVolume = gameSetting.sfxVolume;
     }
 
     public void SetMasterVolume(float _masterVolume)
@@ -86,16 +94,7 @@ public class GameSettingsManager : MonoBehaviour
     public void SaveGameSetting()
     {
         GameSetting _savedGameSetting = LoadGameSetting();
-        
-        if(_savedGameSetting != null)
-        {
-            if(_savedGameSetting.toString() != new GameSetting(defaultGameSettingProfile).toString())
-            {
-                
-            }
-        }
-
-        SaveSystem.SaveGameSetting(gameSetting);
+        SaveSystem.SaveGameSetting(gameSetting, "userGameSettings.dat");
     }
 
     public GameSetting LoadGameSetting()

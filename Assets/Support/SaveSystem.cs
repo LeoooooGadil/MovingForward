@@ -93,10 +93,19 @@ public static class SaveSystem
 		Save(path, new GameSettingData(gameSetting));
 	}
 
-	public static GameSettingData LoadGameSetting(string savename = "gameSettings.dat")
+	public static GameSettingData LoadGameSetting()
 	{
-		string path = gameSettingsPath + "/" + savename;
+		string path = gameSettingsPath;
 		createFoldersIfNotExist();
+
+		if(File.Exists(path + "/userGameSettings.dat"))
+		{
+			path += "/userGameSettings.dat";
+		}
+		else
+		{
+			path += "/gameSettings.dat";
+		}
 
 		if (File.Exists(path))
 		{
@@ -118,9 +127,11 @@ public static class SaveSystem
 	public static void resetGameSettings()
 	{
 		string path = gameSettingsPath + "/gameSettings.dat";
+		string userpathsetting = gameSettingsPath + "/userGameSettings.dat";
 		createFoldersIfNotExist();
 
 		resetSaveFile(path);
+		resetSaveFile(userpathsetting);
 	}
 
 	#endregion

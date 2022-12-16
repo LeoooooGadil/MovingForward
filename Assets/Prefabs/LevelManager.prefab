@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Color: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 6436722154186875595}
   transitionSound: {fileID: 0}
+  lastSceneName: Menu
   isFancyLoading: 1
 --- !u!1 &6436722154771342602
 GameObject:
@@ -224,4 +225,4 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2147483647

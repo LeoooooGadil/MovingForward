@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/CalendarForm.unity
     guid: b47b57a36b488e841865fc86e30fac64
   - enabled: 1
-    path: Assets/Scenes/Main.unity
+    path: Assets/Scenes/Game.unity
     guid: 9f3a225a3190bcd47affb8f47a38e901
   - enabled: 1
     path: Assets/Scenes/Settings.unity

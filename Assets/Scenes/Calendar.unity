@@ -971,8 +971,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b946b5ff34c727e4ab41ba88dc7bb108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Menu
   buttonClickSound: {fileID: 8300000, guid: 659e16ceff8684641bd68c8bad51cfcc, type: 3}
+  isFallback: 1
+  fallbackSceneName: Menu
 --- !u!114 &650767473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2413,6 +2414,10 @@ PrefabInstance:
     - target: {fileID: 6436722154543054495, guid: 50aa039f19b7f4343b1a98a58d28dad4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436722154543054560, guid: 50aa039f19b7f4343b1a98a58d28dad4, type: 3}
+      propertyPath: lastSceneName
+      value: Menu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50aa039f19b7f4343b1a98a58d28dad4, type: 3}

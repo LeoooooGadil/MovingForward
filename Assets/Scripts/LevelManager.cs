@@ -8,8 +8,12 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
     public Image fadeImage;
     public AudioClip transitionSound;
+
+    public string lastSceneName = "Menu";
     
     public bool isFancyLoading = false;
+
+    public string[] notToGoBackTo = new string[] { "Settings", "Credits" };
 
     void Awake()
     {
@@ -27,11 +31,19 @@ public class LevelManager : MonoBehaviour
         fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
     }
 
-    public async void LoadScene(string sceneName)
+    public async Task LoadScene(string sceneName)
     {
+        var currentScene = SceneManager.GetActiveScene();
+        if (!System.Array.Exists(notToGoBackTo, element => element == currentScene.name))
+            lastSceneName = currentScene.name;
+        
+        fadeImage.raycastTarget = true;
+
         var scene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         scene.allowSceneActivation = false;
-        
+
+        await Wait(0.1f);
+
         PlaySound();
         await FadeIn();
 
@@ -41,12 +53,25 @@ public class LevelManager : MonoBehaviour
             if(scene.progress >= 0.9f)
 			{
 				scene.allowSceneActivation = true;
+                fadeImage.raycastTarget = false;
 				await FancyLoading();
 				await FadeOut();
 			}
 
 			await Task.Yield();
         }
+
+
+    }
+
+    public async Task LoadLastScene()
+    {
+        await LoadScene(lastSceneName);
+    }
+
+    private async Task Wait(float seconds)
+    {
+        await Task.Delay((int)(seconds * 1000));
     }
 
 	private async Task FancyLoading()

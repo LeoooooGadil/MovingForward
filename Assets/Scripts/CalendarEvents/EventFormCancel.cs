@@ -20,11 +20,11 @@ public class EventFormCancel : MonoBehaviour
         ChangeScene();
     }
 
-    public void ChangeScene()
+    public async void ChangeScene()
     {
         Debug.Log("changing scene to " + sceneName);
         PlaySound();
-        LevelManager.instance.LoadScene(sceneName);
+        await LevelManager.instance.LoadScene(sceneName);
     }
 
     private void PlaySound()

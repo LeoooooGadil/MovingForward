@@ -16,6 +16,8 @@ public class WeekdayComponent : MonoBehaviour
     public GameObject weekdaysDisplayText;
     TextMeshProUGUI weekdaysDisplayTextComponent;
 
+    public AudioClip buttonClickSound;
+
     void Start()
     {
         weekdays = new string[] {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
@@ -58,7 +60,15 @@ public class WeekdayComponent : MonoBehaviour
     void OnWeekdayButtonClicked(int index)
     {
         activatedWeekdays[index] = !activatedWeekdays[index];
-
+        PlaySound(buttonClickSound);
         DisplayWeekdays();
+    }
+
+    private void PlaySound(AudioClip clip)
+    {
+        if (clip != null)
+        {
+            SoundManager.instance.PlaySFXOneShot(clip);
+        }
     }
 }

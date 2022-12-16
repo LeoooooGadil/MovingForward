@@ -10,6 +10,7 @@ public class MainWorldMenuSystem : MonoBehaviour
     public GameObject mainMenuPanelBackground;
 
     public AudioClip menuOpenSound;
+    public AudioClip menuCloseSound;
 
     bool isMenuOpen = false;
 
@@ -26,20 +27,21 @@ public class MainWorldMenuSystem : MonoBehaviour
 	{
 		if (isMenuOpen)
 		{
+            PlaySound(menuCloseSound);
 			CloseMenu();
 		}
 		else
 		{
-            PlaySound();
+            PlaySound(menuOpenSound);
 			OpenMenu();
 		}
 	}
 
-	private void PlaySound()
+	private void PlaySound(AudioClip clip)
 	{
-		if (menuOpenSound != null)
+		if (clip != null)
 		{
-			SoundManager.instance.PlaySFXOneShot(menuOpenSound);
+			SoundManager.instance.PlaySFXOneShot(clip);
 		}
 	}
 

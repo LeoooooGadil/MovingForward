@@ -21,6 +21,31 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start()
+    {
+        PlayMusic(0);
+    }
+
+    void Update()
+    {
+        musicAudioSource.volume = GetSoundVolume(GameSettingsManager.instance.GetGameSetting().musicVolume);
+        sfxAudioSource.volume = GetSoundVolume(GameSettingsManager.instance.GetGameSetting().sfxVolume);
+    }
+
+    // calculate sound volume based on master volume
+    public float GetSoundVolume(float soundVolume)
+    {
+        return soundVolume * GameSettingsManager.instance.GetGameSetting().masterVolume;
+    }
+
+    public void PlayMusic(int index)
+    {
+        musicAudioSource.clip = musicClips[index];
+        musicAudioSource.Play();
     }
 
     public void PlayMusic(AudioClip clip)
@@ -32,7 +57,6 @@ public class SoundManager : MonoBehaviour
     public void PlaySFX(AudioClip clip)
     {
         sfxAudioSource.clip = clip;
-        sfxAudioSource.volume = GameSettingsManager.instance.GetGameSetting().sfxVolume;
         sfxAudioSource.Play();
     }
 

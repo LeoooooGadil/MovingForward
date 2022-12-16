@@ -30,11 +30,11 @@ public class MenuPlayButton : MonoBehaviour
         }
     }
 
-    public void ChangeScene(string sceneName)
+    public async void ChangeScene(string sceneName)
     {
         Debug.Log("changing scene to " + sceneName);
         PlaySound();
-        LevelManager.instance.LoadScene(sceneName);
+        await LevelManager.instance.LoadScene(sceneName);
     }
 
     private void PlaySound()
