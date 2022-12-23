@@ -6,7 +6,7 @@ public static class SaveSystem
 {
 	public static void createFoldersIfNotExist()
 	{
-		string[] paths = { playerSchedulePath, gameSettingsPath };
+		string[] paths = { playerSchedulePath, gameSettingsPath, playerProfilePath };
 
 		foreach (string path in paths)
 		{
@@ -98,7 +98,7 @@ public static class SaveSystem
 		string path = gameSettingsPath;
 		createFoldersIfNotExist();
 
-		if(File.Exists(path + "/userGameSettings.dat"))
+		if (File.Exists(path + "/userGameSettings.dat"))
 		{
 			path += "/userGameSettings.dat";
 		}
@@ -136,7 +136,51 @@ public static class SaveSystem
 
 	#endregion
 
+	#region playerProfile
 
+	public static string playerProfilePath = Application.persistentDataPath + "/Save";
+
+	public static string playerProfileName = "playerProfile.dat";
+
+	public static void SavePlayerProfile(PlayerProfile playerProfile, string savename = "playerProfile.dat")
+	{
+		string path = playerProfilePath + "/" + savename;
+		createFoldersIfNotExist();
+
+		Save(path, new PlayerProfileData(playerProfile));
+	}
+
+	public static PlayerProfileData LoadPlayerProfile(string savename = "playerProfile.dat")
+	{
+		string path = playerProfilePath + "/" + savename;
+		createFoldersIfNotExist();
+
+		if (File.Exists(path))
+		{
+			BinaryFormatter formatter = new BinaryFormatter();
+			FileStream stream = new FileStream(path, FileMode.Open);
+
+			PlayerProfileData data = formatter.Deserialize(stream) as PlayerProfileData;
+			stream.Close();
+
+			return data;
+		}
+		else
+		{
+			// Debug.LogError("Save file not found in " + playerProfilePath);
+			return null;
+		}
+	}
+
+	public static void resetPlayerProfile()
+	{
+		string path = playerProfilePath + "/" + playerProfileName;
+		createFoldersIfNotExist();
+
+		resetSaveFile(path);
+	}
+
+	#endregion
 
 }
 

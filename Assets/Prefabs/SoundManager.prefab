@@ -174,7 +174,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -281,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6900566767071837690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 996.93604, y: 489.5012, z: 13.800775}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -304,5 +304,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicAudioSource: {fileID: 6900566765907189233}
   sfxAudioSource: {fileID: 6900566765209597017}
-  musicClips:
-  - {fileID: 8300000, guid: 87a13cbb573c8c54eb201ac48364d30a, type: 3}
+  musicClips: []
+  sfxClips:
+  - {fileID: 8300000, guid: 659e16ceff8684641bd68c8bad51cfcc, type: 3}
+  - {fileID: 8300000, guid: cde0321ea289fec45bf8621fef71e62c, type: 3}
+  - {fileID: 8300000, guid: a39aea208ff58cb4fa548576240f9fe9, type: 3}

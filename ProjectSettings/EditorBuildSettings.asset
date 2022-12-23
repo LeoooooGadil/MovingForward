@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 3f5dc814a251282488f6f9b15872f60e
+    path: Assets/Scenes/MainMenu.unity
+    guid: e3b44431172b6a140a62f78cdaca0c91
+  - enabled: 1
+    path: Assets/Scenes/Introduction.unity
+    guid: 01b0057f7c10dc64f9df13e7ae7ab7e1
   - enabled: 1
     path: Assets/Scenes/Calendar.unity
     guid: eda6bb4ef37ad3e468144bad2eb00587
@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/CalendarForm.unity
     guid: b47b57a36b488e841865fc86e30fac64
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 9f3a225a3190bcd47affb8f47a38e901
+    path: Assets/Scenes/InGame.unity
+    guid: 16dd31224591a674d98fafd29187d4d2
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 8abd7233f082a5644b0f03df68be46e7
