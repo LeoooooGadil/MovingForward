@@ -1,19 +1,22 @@
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using UnityEngine.Android;
 public static class SaveSystem
 {
-	public static void createFoldersIfNotExist()
+	public static void PermissionCheck()
 	{
-		string[] paths = { playerSchedulePath, gameSettingsPath, playerProfilePath };
-
-		foreach (string path in paths)
+		if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageWrite))
 		{
-			if (!Directory.Exists(path))
-			{
-				Directory.CreateDirectory(path);
-			}
+			Debug.Log("Requesting permission to write to external storage...");
+			Debug.Log("Permission.ExternalStorageWrite: " + Permission.ExternalStorageWrite);
+			Permission.RequestUserPermission(Permission.ExternalStorageWrite);
+		}
+
+		if (!Permission.HasUserAuthorizedPermission(Permission.ExternalStorageRead))
+		{
+			Debug.Log("Requesting permission to read from external storage...");
+			Permission.RequestUserPermission(Permission.ExternalStorageRead);
 		}
 	}
 
@@ -30,6 +33,8 @@ public static class SaveSystem
 
 	public static void resetSaveFile(string path)
 	{
+		PermissionCheck();
+
 		if (File.Exists(path))
 		{
 			File.Delete(path);
@@ -38,13 +43,12 @@ public static class SaveSystem
 
 	#region playerSchedule
 
-	public static string playerSchedulePath = Application.persistentDataPath + "/Save";
+	public static string playerSchedulePath = Application.persistentDataPath;
 	public static string playerScheduleName = "playerSchedule.dat";
 
 	public static void SavePlayerSchedule(PlayerSchedule playerSchedule, string savename = "")
 	{
 		string path = playerSchedulePath + "/" + (savename == "" ? playerScheduleName : savename);
-		createFoldersIfNotExist();
 
 		Save(path, new PlayerScheduleData(playerSchedule));
 	}
@@ -52,7 +56,6 @@ public static class SaveSystem
 	public static PlayerScheduleData LoadPlayerSchedule(string savename = "")
 	{
 		string path = playerSchedulePath + "/" + (savename == "" ? playerScheduleName : savename);
-		createFoldersIfNotExist();
 
 		if (File.Exists(path))
 		{
@@ -74,8 +77,6 @@ public static class SaveSystem
 	public static void resetPlayerSchedule()
 	{
 		string path = playerSchedulePath + "/" + playerScheduleName;
-		createFoldersIfNotExist();
-
 		resetSaveFile(path);
 	}
 
@@ -83,20 +84,17 @@ public static class SaveSystem
 
 	#region gameSettings
 
-	public static string gameSettingsPath = Application.persistentDataPath + "/Setting";
+	public static string gameSettingsPath = Application.persistentDataPath;
 
 	public static void SaveGameSetting(GameSetting gameSetting, string savename = "gameSettings.dat")
 	{
 		string path = gameSettingsPath + "/" + savename;
-		createFoldersIfNotExist();
-
 		Save(path, new GameSettingData(gameSetting));
 	}
 
 	public static GameSettingData LoadGameSetting()
 	{
 		string path = gameSettingsPath;
-		createFoldersIfNotExist();
 
 		if (File.Exists(path + "/userGameSettings.dat"))
 		{
@@ -128,7 +126,6 @@ public static class SaveSystem
 	{
 		string path = gameSettingsPath + "/gameSettings.dat";
 		string userpathsetting = gameSettingsPath + "/userGameSettings.dat";
-		createFoldersIfNotExist();
 
 		resetSaveFile(path);
 		resetSaveFile(userpathsetting);
@@ -138,14 +135,13 @@ public static class SaveSystem
 
 	#region playerProfile
 
-	public static string playerProfilePath = Application.persistentDataPath + "/Save";
+	public static string playerProfilePath = Application.persistentDataPath;
 
 	public static string playerProfileName = "playerProfile.dat";
 
 	public static void SavePlayerProfile(PlayerProfile playerProfile, string savename = "playerProfile.dat")
 	{
 		string path = playerProfilePath + "/" + savename;
-		createFoldersIfNotExist();
 
 		Save(path, new PlayerProfileData(playerProfile));
 	}
@@ -153,7 +149,6 @@ public static class SaveSystem
 	public static PlayerProfileData LoadPlayerProfile(string savename = "playerProfile.dat")
 	{
 		string path = playerProfilePath + "/" + savename;
-		createFoldersIfNotExist();
 
 		if (File.Exists(path))
 		{
@@ -175,8 +170,48 @@ public static class SaveSystem
 	public static void resetPlayerProfile()
 	{
 		string path = playerProfilePath + "/" + playerProfileName;
-		createFoldersIfNotExist();
+		resetSaveFile(path);
+	}
 
+	#endregion
+
+	#region playerDailyTasks
+
+	public static string playerDailyTasksPath = Application.persistentDataPath;
+
+	public static string playerDailyTasksName = "playerDailyTasks.dat";
+
+	public static void SavePlayerDailyTasks(PlayerDailyTaskList playerDailyTaskList, string savename = "playerDailyTasks.dat")
+	{
+		string path = playerDailyTasksPath + "/" + savename;
+
+		Save(path, new PlayerDailyTaskListData(playerDailyTaskList));
+	}
+
+	public static PlayerDailyTaskListData LoadPlayerDailyTasks(string savename = "playerDailyTasks.dat")
+	{
+		string path = playerDailyTasksPath + "/" + savename;
+
+		if (File.Exists(path))
+		{
+			BinaryFormatter formatter = new BinaryFormatter();
+			FileStream stream = new FileStream(path, FileMode.Open);
+
+			PlayerDailyTaskListData data = formatter.Deserialize(stream) as PlayerDailyTaskListData;
+			stream.Close();
+
+			return data;
+		}
+		else
+		{
+			// Debug.LogError("Save file not found in " + playerDailyTasksPath);
+			return null;
+		}
+	}
+
+	public static void resetPlayerDailyTasks()
+	{
+		string path = playerDailyTasksPath + "/" + playerDailyTasksName;
 		resetSaveFile(path);
 	}
 

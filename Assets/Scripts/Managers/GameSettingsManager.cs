@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public class GameSettingsManager : MonoBehaviour
 {
@@ -20,8 +21,12 @@ public class GameSettingsManager : MonoBehaviour
     [Range(0f, 1f)]
     public float sfxVolume;
 
+
 	void Awake()
 	{
+        // set fps to 60
+        Application.targetFrameRate = 60;
+
 		if (instance == null)
 		{
 			instance = this;

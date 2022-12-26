@@ -517,8 +517,8 @@ GameObject:
   - component: {fileID: 885772916}
   - component: {fileID: 885772915}
   - component: {fileID: 885772914}
-  - component: {fileID: 885772917}
   - component: {fileID: 885772918}
+  - component: {fileID: 885772919}
   m_Layer: 5
   m_Name: OptionsButton
   m_TagString: Untagged
@@ -628,19 +628,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 885772912}
   m_CullTransparentMesh: 1
---- !u!114 &885772917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 885772912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ad709c46bd20e439d4fba308ebedff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneObject: {fileID: 102900000, guid: 8abd7233f082a5644b0f03df68be46e7, type: 3}
 --- !u!114 &885772918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -654,6 +641,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxIndex: 0
+--- !u!114 &885772919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885772912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ad709c46bd20e439d4fba308ebedff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Settings
 --- !u!1001 &899768357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1169,9 +1169,9 @@ GameObject:
   - component: {fileID: 1965255089}
   - component: {fileID: 1965255088}
   - component: {fileID: 1965255087}
-  - component: {fileID: 1965255091}
-  - component: {fileID: 1965255090}
   - component: {fileID: 1965255092}
+  - component: {fileID: 1965255094}
+  - component: {fileID: 1965255093}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -1281,33 +1281,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965255085}
   m_CullTransparentMesh: 1
---- !u!114 &1965255090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965255085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e234c26ea82e2c43ae3948c1d5d9f6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSceneObject: {fileID: 102900000, guid: 16dd31224591a674d98fafd29187d4d2, type: 3}
-  fallbackSceneObject: {fileID: 102900000, guid: 01b0057f7c10dc64f9df13e7ae7ab7e1, type: 3}
---- !u!114 &1965255091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1965255085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ad709c46bd20e439d4fba308ebedff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneObject: {fileID: 0}
 --- !u!114 &1965255092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1321,6 +1294,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sfxIndex: 0
+--- !u!114 &1965255093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965255085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e234c26ea82e2c43ae3948c1d5d9f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSceneName: InGame
+  fallbackSceneName: Introduction
+--- !u!114 &1965255094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1965255085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5ad709c46bd20e439d4fba308ebedff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Introduction
 --- !u!1 &2058691986
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +6,7 @@ public class MainWorldMenuSystem : MonoBehaviour
 	public GameObject mainMenuButton;
 	public GameObject mainMenuPanel;
 	public GameObject mainMenuPanelBackground;
+	public SceneryController sceneryController;
 
 	bool isMenuOpen = false;
 
@@ -21,6 +20,7 @@ public class MainWorldMenuSystem : MonoBehaviour
 	{
 		mainMenuButton.GetComponent<Button>().onClick.AddListener(ToggleMenu);
 		mainMenuPanelBackground.GetComponent<Button>().onClick.AddListener(ToggleMenu);
+		sceneryController.mainWorldMenuSystem = this;
 	}
 
 	void ToggleMenu()
@@ -29,6 +29,7 @@ public class MainWorldMenuSystem : MonoBehaviour
 			CloseMenu();
 		else
 			OpenMenu();
+			sceneryController.UpdateList();
 	}
 
 

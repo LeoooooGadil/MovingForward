@@ -269,7 +269,7 @@ GameObject:
   m_Layer: 0
   m_Name: SoundManager
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -309,3 +309,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 659e16ceff8684641bd68c8bad51cfcc, type: 3}
   - {fileID: 8300000, guid: cde0321ea289fec45bf8621fef71e62c, type: 3}
   - {fileID: 8300000, guid: a39aea208ff58cb4fa548576240f9fe9, type: 3}
+  - {fileID: 8300000, guid: 23ecbf68426472a408102c95f9e848e3, type: 3}
+  - {fileID: 8300000, guid: 89c8711209fa5564883e5432bc7a03e8, type: 3}
+  - {fileID: 8300000, guid: 21762c2309aa7bf4f9341b6242461430, type: 3}
+  - {fileID: 8300000, guid: 66decd5453147014d84e921db9d4b822, type: 3}

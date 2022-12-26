@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public Image fadeImage;
     public AudioClip transitionSound;
 
-    public string lastSceneName = "Menu";
+    public string lastSceneName = "MainMenu";
     
     public bool isFancyLoading = false;
 
@@ -33,15 +33,13 @@ public class LevelManager : MonoBehaviour
 
     public async Task LoadScene(string sceneName)
     {
-        var currentScene = SceneManager.GetActiveScene();
-        if (!System.Array.Exists(notToGoBackTo, element => element == currentScene.name))
-            lastSceneName = currentScene.name;
-        
+        lastSceneName = (System.Array.IndexOf(notToGoBackTo, sceneName) == -1) ? sceneName : lastSceneName;
+
         fadeImage.raycastTarget = true;
 
         var scene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         scene.allowSceneActivation = false;
-
+ 
         await Wait(0.1f);
 
         PlaySound();

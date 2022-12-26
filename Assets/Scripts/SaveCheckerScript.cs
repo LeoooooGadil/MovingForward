@@ -7,8 +7,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ChangeSceneScript))]
 public class SaveCheckerScript : MonoBehaviour
 {
-    public Object defaultSceneObject;
-    public Object fallbackSceneObject;
+    public string defaultSceneName;
+    public string fallbackSceneName;
 
     string sceneName_1;
     string sceneName_2;
@@ -18,45 +18,41 @@ public class SaveCheckerScript : MonoBehaviour
 
     void OnValidate()
     {
-        if (defaultSceneObject == null)
+        if (defaultSceneName == null)
         {
-            Debug.LogError("Scene object 1 is null");
+            Debug.LogError("Scene name 1 is null. Please enter a scene name.");
             return;
         }
 
-        if (fallbackSceneObject == null)
+        if (fallbackSceneName == null)
         {
-            Debug.LogError("Scene object 2 is null");
+            Debug.LogError("Scene name 2 is null. Please enter a scene name.");
             return;
-        }
-
-        if (defaultSceneObject != null)
-        {
-            sceneName_1 = defaultSceneObject.name;
-        }
-
-        if (fallbackSceneObject != null)
-        {
-            sceneName_2 = fallbackSceneObject.name;
         }
     }
 
     void Start() {
         changeSceneScript = GetComponent<ChangeSceneScript>();
+        Debug.Log("Checking for save data...");
         CheckSave();
     }
 
     private void CheckSave(){
-        PlayerProfileData saveData = SaveSystem.LoadPlayerProfile();
+        PlayerProfileData saveData;
+
+        try {
+            saveData = SaveSystem.LoadPlayerProfile();
+        } catch (System.Exception) {
+            Debug.Log("No save data found.");
+            changeSceneScript.sceneName = fallbackSceneName;
+            return;
+        }
 
         if (saveData != null)
         {
-            changeSceneScript.sceneObject = defaultSceneObject;
+            changeSceneScript.sceneName = defaultSceneName;
             Debug.Log("Welcome back, " + saveData.playerName + "!");
-        }
-        else
-        {
-            changeSceneScript.sceneObject = fallbackSceneObject;
+            return;
         }
     }
 }

@@ -23,4 +23,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 8abd7233f082a5644b0f03df68be46e7
+  - enabled: 1
+    path: Assets/Scenes/Scenery/Home.unity
+    guid: 92fddb9cf7074a945a5c80be055933aa
+  - enabled: 1
+    path: Assets/Scenes/Scenery/OutAndAbout.unity
+    guid: 64ca2fbef363da841b4da2702e6aa90f
+  - enabled: 1
+    path: Assets/Scenes/Scenery/School.unity
+    guid: 49f44ff9fb6a3ea499beaf5250e8729a
+  - enabled: 1
+    path: Assets/Scenes/Scenery/Work.unity
+    guid: 96c339fa257647c489c9473c6da822d6
   m_configObjects: {}

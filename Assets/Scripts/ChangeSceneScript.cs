@@ -7,36 +7,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class ChangeSceneScript : MonoBehaviour
 {
-	public Object sceneObject;
-	string sceneName;
+	public string sceneName;
 	Button button;
-
-	void OnValidate()
-	{
-		SaveCheckerScript _saveCheckerScript = GetComponent<SaveCheckerScript>();
-
-		if (_saveCheckerScript == null)
-		{
-			if (sceneObject == null)
-			{
-				Debug.LogError("Scene object is null");
-				return;
-			}
-		}
-	}
 
 	void Start()
 	{
 		button = GetComponent<Button>();
 		button.onClick.AddListener(async () => await ChangeScene());
-	}
-
-	void Update()
-	{
-		if (sceneObject != null)
-		{
-			sceneName = sceneObject.name;
-		}
 	}
 
 	async Task ChangeScene()

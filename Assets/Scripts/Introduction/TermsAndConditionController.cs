@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class TermsAndConditionController : IntroductionPanel
 {
-	bool isTermsAndConditionAccepted = false;
 	public Button acceptButton;
 
 	void Start()
@@ -19,12 +18,6 @@ public class TermsAndConditionController : IntroductionPanel
 
 	public void AcceptTermsAndCondition()
 	{
-		isTermsAndConditionAccepted = true;
 		FinishPanel(true);
-	}
-
-	public void DeclineTermsAndCondition()
-	{
-		isTermsAndConditionAccepted = false;
 	}
 }

@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class NewGameScript : MonoBehaviour
 {
-	public Object nextScene;
+	public string nextScene;
 	public GameObject[] panels;
 	IntroductionPanel[] introductionPanels;
 	LoadingController loadingController;
 	int currentPanel = 0;
-	string nextSceneName;
 
 	public object[] data;
 
@@ -35,11 +34,6 @@ public class NewGameScript : MonoBehaviour
 		{
 			Debug.LogError("No next scene found");
 			return;
-		}
-
-		if (nextScene != null)
-		{
-			nextSceneName = nextScene.name;
 		}
 
 		if (panels.Length != introductionPanels.Length)
@@ -77,7 +71,7 @@ public class NewGameScript : MonoBehaviour
 					Debug.Log("panel " + i + ": " + data[i]);
 				}
 				SaveData();
-				await LevelManager.instance.LoadScene(nextSceneName);
+				await LevelManager.instance.LoadScene(nextScene);
 				return;
 			}
 			await loadingController.Wait(0.5f);
