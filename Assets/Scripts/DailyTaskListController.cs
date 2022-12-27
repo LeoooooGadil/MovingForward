@@ -47,6 +47,7 @@ public class DailyTaskListController : MonoBehaviour
 
     public void CompleteTask(string taskName) {
         dailyTaskManager.CompleteDailyTask(taskName);
+        PlayerStatisticsManager.instance.xpManager.AddExperience(dailyTaskManager.GetDailyTask(taskName).Points);
         dailyTaskManager.SaveDailyTaskList();
 
         if(dailyTaskManager.GetUnfinishedDailyTask().Length == 0) {

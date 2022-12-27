@@ -61,6 +61,26 @@ public class DailyTaskManager
         return FinishedDailyTask;
     }
 
+    // get a task by name
+    public DailyTask GetDailyTask(string taskName)
+    {
+        for (int i = 0; i < UnfinishedDailyTask.Length; i++)
+        {
+            if (UnfinishedDailyTask[i].Name == taskName)
+            {
+                return UnfinishedDailyTask[i];
+            }
+        }
+        for (int i = 0; i < FinishedDailyTask.Length; i++)
+        {
+            if (FinishedDailyTask[i].Name == taskName)
+            {
+                return FinishedDailyTask[i];
+            }
+        }
+        return null;
+    }
+
     // complete a daily task and move it to the finished list of daily tasks
     public void CompleteDailyTask(string taskName)
     {

@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerStatisticsManager : MonoBehaviour
 {
 	public static PlayerStatisticsManager instance;
-    ExperienceManager experienceManager;
+	[HideInInspector]
+    public ExperienceManager xpManager;
 
 	void Awake()
 	{
@@ -21,6 +22,6 @@ public class PlayerStatisticsManager : MonoBehaviour
 	}
 
     void Start() {
-        experienceManager = GetComponent<ExperienceManager>();
+        xpManager = GetComponent<ExperienceManager>();
     }
 }
