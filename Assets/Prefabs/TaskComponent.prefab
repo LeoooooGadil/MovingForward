@@ -416,7 +416,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 21d0558076040894288af3c8c540700f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9191f1754fe4544e8452cc77ec1ba61, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -455,10 +455,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: d9191f1754fe4544e8452cc77ec1ba61, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 62ff3221cca8c4642bae496985c498cb, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: d9191f1754fe4544e8452cc77ec1ba61, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: d9191f1754fe4544e8452cc77ec1ba61, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 74dca50fdc3f3284e9313db28017741e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8094820a056e85143ae47cdf15429b4b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -566,10 +566,10 @@ MonoBehaviour:
   taskName: 
   taskPoints: 0
   taskIsCompleted: 0
-  taskButtonNormalSprite: {fileID: 21300000, guid: 74dca50fdc3f3284e9313db28017741e, type: 3}
-  taskButtonDisabledSprite: {fileID: 21300000, guid: 1896390c8c58bf647b0cf2db5a66fa9f, type: 3}
-  taskRadioButtonSprite: {fileID: 21300000, guid: 21d0558076040894288af3c8c540700f, type: 3}
-  taskRadioButtonDisabledSprite: {fileID: 21300000, guid: 75262a3be9a1260459979a8f462fcd3f, type: 3}
-  taskRadioButtonPressedSprite: {fileID: 21300000, guid: 53d0b59a7ba712541bdc0cb3966a7574, type: 3}
-  taskRadioButtonPressedDisabledSprite: {fileID: 21300000, guid: 13115615d979a4a499f42257d6303710, type: 3}
+  taskButtonNormalSprite: {fileID: 21300000, guid: 8094820a056e85143ae47cdf15429b4b, type: 3}
+  taskButtonDisabledSprite: {fileID: 21300000, guid: 3be1a5d67279dab4ca8c2b2ff07514a6, type: 3}
+  taskRadioButtonSprite: {fileID: 21300000, guid: d9191f1754fe4544e8452cc77ec1ba61, type: 3}
+  taskRadioButtonDisabledSprite: {fileID: 21300000, guid: 62ff3221cca8c4642bae496985c498cb, type: 3}
+  taskRadioButtonPressedSprite: {fileID: 21300000, guid: f994425c787cb9e4e960f08a2960d321, type: 3}
+  taskRadioButtonPressedDisabledSprite: {fileID: 21300000, guid: 126fc2e371246d14c8b3f65d2bcac11f, type: 3}
   dailyTaskListController: {fileID: 0}

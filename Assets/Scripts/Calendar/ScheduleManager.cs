@@ -25,9 +25,17 @@ public class ScheduleManager : MonoBehaviour
 		formPanel.SetActive(false);
 		introductionPanel.SetActive(false);
 
-		PlayerProfileData playerProfile = SaveSystem.LoadPlayerProfile();
+		PlayerProfileData playerProfileData = SaveSystem.LoadPlayerProfile();
 
-		isPlayerNew = playerProfile == null || playerProfile.isPlayerAddedToCalendar == false;
+		if (playerProfileData != null)
+		{
+			PlayerProfile playerProfile = new PlayerProfile(playerProfileData);
+			isPlayerNew = !playerProfile.isPlayerAddedToCalendar;
+		}
+		else
+		{
+			isPlayerNew = true;
+		}
 
 		Debug.Log("isPlayerNew: " + isPlayerNew);
 
@@ -48,25 +56,21 @@ public class ScheduleManager : MonoBehaviour
 
 	public async Task introductionIsDone()
 	{
-        PlayerProfileData playerProfile = SaveSystem.LoadPlayerProfile();
+		PlayerProfileData playerProfileData = SaveSystem.LoadPlayerProfile();
 
-        if(playerProfile == null)
-        {
-            playerProfile = new PlayerProfileData();
-        }
-
-        PlayerProfile playerProfileObject = new PlayerProfile(playerProfile);
-        playerProfileObject.SetIsPlayerAddedToCalendar(true);
-        SaveSystem.SavePlayerProfile(playerProfileObject);
+		if(playerProfileData != null) {
+			playerProfileData.isPlayerAddedToCalendar = true;
+			SaveSystem.SavePlayerProfile(new PlayerProfile(playerProfileData));
+		}
 
         PlayOneShot(buttonClickSound);
 
 		await FadeIn();
         introductionPanel.SetActive(false);
-		await Wait(0.5f);
         formPanel.SetActive(true);
-		await FadeOut();
 		UpdateList();
+		await Wait(0.5f);
+		await FadeOut();
 	}
 
     public void PlayOneShot(AudioClip clip)

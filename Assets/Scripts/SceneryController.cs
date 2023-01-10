@@ -17,7 +17,7 @@ public class SceneryController : MonoBehaviour
 
     void Start()
     {
-        UpdateScenery();
+        LoadScenery();
     }
 
     public async Task setScenery(int index)
@@ -27,6 +27,7 @@ public class SceneryController : MonoBehaviour
         UpdateScenery();
         await Task.Delay(50);
         mainWorldMenuSystem.CloseMenu();
+        SaveScenery();
     }
 
     public void UpdateList()
@@ -52,6 +53,8 @@ public class SceneryController : MonoBehaviour
     }
 
     void UpdateScenery() {
+        Scene currentScene = SceneManager.GetActiveScene();
+
         var scene = SceneManager.LoadSceneAsync(sceneries[currentSceneryIndex], LoadSceneMode.Additive);
         scene.completed += (AsyncOperation op) => {
             SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneries[currentSceneryIndex]));
@@ -60,7 +63,37 @@ public class SceneryController : MonoBehaviour
                 SceneManager.UnloadSceneAsync(currentScenery);
 
             currentScenery = SceneManager.GetSceneByName(sceneries[currentSceneryIndex]);
+
+            SceneManager.SetActiveScene(currentScene);
         };
+    }
+
+    public void SaveScenery()
+    {
+        GameInformationData gameInformationData = SaveSystem.LoadGameInformation();
+        
+        if (gameInformationData == null)
+        {
+            gameInformationData = new GameInformationData();
+        }
+
+        gameInformationData.currentScenery = currentSceneryIndex;
+        SaveSystem.SaveGameInformation(new GameInformation(gameInformationData));
+    }
+
+    public void LoadScenery()
+    {
+        GameInformationData gameInformationData = SaveSystem.LoadGameInformation();
+
+        if (gameInformationData == null)
+        {
+            UpdateScenery();
+            return;
+        }
+
+        GameInformation gameInformation = new GameInformation(gameInformationData);
+        currentSceneryIndex = gameInformation.getCurrentScenery();
+        UpdateScenery();
     }
 
     

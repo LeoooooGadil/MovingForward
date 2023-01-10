@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DefaultGameSettings
   m_EditorClassIdentifier: 
   masterVolume: 1
-  musicVolume: 0.247
-  sfxVolume: 0.24
+  musicVolume: 0.5
+  sfxVolume: 1

@@ -27,7 +27,7 @@ public class DailyTasksController : MonoBehaviour
 		dailyTaskListController.dailyTasksController = this;
 	}
 
-	void ToggleMenu()
+	public void ToggleMenu()
 	{
 		if (isMenuOpen)
 			CloseMenu();

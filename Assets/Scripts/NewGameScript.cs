@@ -66,16 +66,12 @@ public class NewGameScript : MonoBehaviour
 			await loadingController.FadeIn();
 			if (currentPanel >= panels.Length)
 			{
-				for (int i = 0; i < data.Length; i++)
-				{
-					Debug.Log("panel " + i + ": " + data[i]);
-				}
 				SaveData();
 				await LevelManager.instance.LoadScene(nextScene);
 				return;
 			}
-			await loadingController.Wait(0.5f);
 			updatePanels();
+			await loadingController.Wait(0.5f);
 			await loadingController.FadeOut();
 		}
 	}
@@ -92,14 +88,16 @@ public class NewGameScript : MonoBehaviour
 
 		bool isTermsAndConditionAccepted = (bool)_data[0];
 		string playerName = (string)_data[1];
+		int playerAge = (int)_data[2];
 
 		//put collected data into the PlayerProfile data class
 		PlayerProfile playerProfile = new PlayerProfile();
 		playerProfile.SetPlayerName(playerName);
+		playerProfile.SetPlayerAge(playerAge);
 		playerProfile.SetPlayerLevel(1);
 		playerProfile.SetPlayerExp(0);
-		playerProfile.SetIsPlayerAcceptedTerms(isTermsAndConditionAccepted);
-		playerProfile.SetIsPlayerAcceptedTerms(false);
+		playerProfile.SetIsPlayerAcceptedTerms(true);
+		playerProfile.SetIsPlayerAddedToCalendar(false);
 
 		//save the data
 		SaveSystem.SavePlayerProfile(playerProfile);

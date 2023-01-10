@@ -2,6 +2,8 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.Android;
+using System;
+
 public static class SaveSystem
 {
 	public static void PermissionCheck()
@@ -20,8 +22,20 @@ public static class SaveSystem
 		}
 	}
 
+	public static void CreateDirectory(string path)
+	{
+		PermissionCheck();
+
+		if (!Directory.Exists(path))
+		{
+			Directory.CreateDirectory(path);
+		}
+	}
+
 	public static void Save(string path, object data)
 	{
+		PermissionCheck();
+
 		BinaryFormatter formatter = new BinaryFormatter();
 		FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -43,7 +57,7 @@ public static class SaveSystem
 
 	#region playerSchedule
 
-	public static string playerSchedulePath = Application.persistentDataPath;
+	public static string playerSchedulePath = Application.persistentDataPath + "/player";
 	public static string playerScheduleName = "playerSchedule.dat";
 
 	public static void SavePlayerSchedule(PlayerSchedule playerSchedule, string savename = "")
@@ -55,15 +69,25 @@ public static class SaveSystem
 
 	public static PlayerScheduleData LoadPlayerSchedule(string savename = "")
 	{
+		CreateDirectory(playerSchedulePath);
+
 		string path = playerSchedulePath + "/" + (savename == "" ? playerScheduleName : savename);
 
 		if (File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
+			PlayerScheduleData data = null;
 
-			PlayerScheduleData data = formatter.Deserialize(stream) as PlayerScheduleData;
-			stream.Close();
+			try
+			{
+				data = formatter.Deserialize(stream) as PlayerScheduleData;
+				stream.Dispose();
+				stream.Close();
+			} catch (Exception e)
+			{
+				Debug.LogError(e);
+			}
 
 			return data;
 		}
@@ -84,7 +108,7 @@ public static class SaveSystem
 
 	#region gameSettings
 
-	public static string gameSettingsPath = Application.persistentDataPath;
+	public static string gameSettingsPath = Application.persistentDataPath + "/game";
 
 	public static void SaveGameSetting(GameSetting gameSetting, string savename = "gameSettings.dat")
 	{
@@ -105,12 +129,15 @@ public static class SaveSystem
 			path += "/gameSettings.dat";
 		}
 
+		CreateDirectory(gameSettingsPath);
+
 		if (File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
 
 			GameSettingData data = formatter.Deserialize(stream) as GameSettingData;
+			stream.Dispose();
 			stream.Close();
 
 			return data;
@@ -135,7 +162,7 @@ public static class SaveSystem
 
 	#region playerProfile
 
-	public static string playerProfilePath = Application.persistentDataPath;
+	public static string playerProfilePath = Application.persistentDataPath + "/player";
 
 	public static string playerProfileName = "playerProfile.dat";
 
@@ -150,12 +177,15 @@ public static class SaveSystem
 	{
 		string path = playerProfilePath + "/" + savename;
 
+		CreateDirectory(playerProfilePath);
+
 		if (File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
 
 			PlayerProfileData data = formatter.Deserialize(stream) as PlayerProfileData;
+			stream.Dispose();
 			stream.Close();
 
 			return data;
@@ -177,7 +207,7 @@ public static class SaveSystem
 
 	#region playerDailyTasks
 
-	public static string playerDailyTasksPath = Application.persistentDataPath;
+	public static string playerDailyTasksPath = Application.persistentDataPath + "/player";
 
 	public static string playerDailyTasksName = "playerDailyTasks.dat";
 
@@ -192,12 +222,15 @@ public static class SaveSystem
 	{
 		string path = playerDailyTasksPath + "/" + savename;
 
+		CreateDirectory(playerDailyTasksPath);
+
 		if (File.Exists(path))
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			FileStream stream = new FileStream(path, FileMode.Open);
 
 			PlayerDailyTaskListData data = formatter.Deserialize(stream) as PlayerDailyTaskListData;
+			stream.Dispose();
 			stream.Close();
 
 			return data;
@@ -217,5 +250,49 @@ public static class SaveSystem
 
 	#endregion
 
+	#region gameInformation
+
+	public static string gameInformationPath = Application.persistentDataPath + "/game";
+
+	public static string gameInformationName = "gameInformation.dat";
+
+	public static void SaveGameInformation(GameInformation gameInformation, string savename = "gameInformation.dat")
+	{
+		string path = gameInformationPath + "/" + savename;
+
+		Save(path, new GameInformationData(gameInformation));
+	}
+
+	public static GameInformationData LoadGameInformation(string savename = "gameInformation.dat")
+	{
+		string path = gameInformationPath + "/" + savename;
+
+		CreateDirectory(gameInformationPath);
+
+		if (File.Exists(path))
+		{
+			BinaryFormatter formatter = new BinaryFormatter();
+			FileStream stream = new FileStream(path, FileMode.Open);
+
+			GameInformationData data = null;
+			data = formatter.Deserialize(stream) as GameInformationData;
+			stream.Dispose();
+			stream.Close();
+			return data;
+		}
+		else
+		{
+			// Debug.LogError("Save file not found in " + gameInformationPath);
+			return null;
+		}
+	}
+
+	public static void resetGameInformation()
+	{
+		string path = gameInformationPath + "/" + gameInformationName;
+		resetSaveFile(path);
+	}
+
+	#endregion
 }
 

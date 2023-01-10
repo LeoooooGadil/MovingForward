@@ -5,72 +5,80 @@ using System.Threading.Tasks;
 
 public class LevelManager : MonoBehaviour
 {
-    public static LevelManager instance;
-    public Image fadeImage;
-    public AudioClip transitionSound;
+	public static LevelManager instance;
+	public Image fadeImage;
+	public AudioClip transitionSound;
 
-    public string lastSceneName = "MainMenu";
-    
-    public bool isFancyLoading = false;
+	public string lastSceneName = "MainMenu";
 
-    public string[] notToGoBackTo = new string[] { "Settings", "Credits" };
+	public bool isFancyLoading = false;
 
-    void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+	public string[] notToGoBackTo = new string[] {
+		"Settings",
+		"Credits",
+		"BreathingGame",
+		"Home",
+		"Work",
+		"School",
+		"OutAndAbout"
+		};
 
-        // Set the fade image to be transparent
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
-    }
+	void Awake()
+	{
+		if (instance == null)
+		{
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
 
-    public async Task LoadScene(string sceneName)
-    {
-        lastSceneName = (System.Array.IndexOf(notToGoBackTo, sceneName) == -1) ? sceneName : lastSceneName;
+		// Set the fade image to be transparent
+		fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
+	}
 
-        fadeImage.raycastTarget = true;
+	public async Task LoadScene(string sceneName)
+	{
+		lastSceneName = (System.Array.IndexOf(notToGoBackTo, SceneManager.GetActiveScene().name) == -1) ? SceneManager.GetActiveScene().name : lastSceneName;
 
-        var scene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-        scene.allowSceneActivation = false;
- 
-        await Wait(0.1f);
+		fadeImage.raycastTarget = true;
 
-        PlaySound();
-        await FadeIn();
+		var scene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+		scene.allowSceneActivation = false;
 
-        // Wait for the scene to load
-        while(!scene.isDone)
-        {
-            if(scene.progress >= 0.9f)
+		await Wait(0.1f);
+
+		PlaySound();
+		await FadeIn();
+
+		// Wait for the scene to load
+		while (!scene.isDone)
+		{
+			if (scene.progress >= 0.9f)
 			{
 				scene.allowSceneActivation = true;
-                fadeImage.raycastTarget = false;
+				fadeImage.raycastTarget = false;
 				await FancyLoading();
 				await FadeOut();
 			}
 
 			await Task.Yield();
-        }
+		}
 
+		Debug.Log("lastSceneName: " + lastSceneName);
+	}
 
-    }
+	public async Task LoadLastScene()
+	{
+		await LoadScene(lastSceneName);
+	}
 
-    public async Task LoadLastScene()
-    {
-        await LoadScene(lastSceneName);
-    }
-
-    private async Task Wait(float seconds)
-    {
-        await Task.Delay((int)(seconds * 1000));
-    }
+	private async Task Wait(float seconds)
+	{
+		await Task.Delay((int)(seconds * 1000));
+	}
 
 	private async Task FancyLoading()
 	{
@@ -80,7 +88,7 @@ public class LevelManager : MonoBehaviour
 		}
 	}
 
-    private void PlaySound()
+	private void PlaySound()
 	{
 		if (transitionSound != null)
 		{
@@ -89,17 +97,17 @@ public class LevelManager : MonoBehaviour
 	}
 
 	public async Task FadeIn()
-    {
-        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
-        fadeImage.canvasRenderer.SetAlpha(0.0f);
-        fadeImage.CrossFadeAlpha(1.0f, 0.3f, false);
-        await Task.Delay(300);
-    }
+	{
+		fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
+		fadeImage.canvasRenderer.SetAlpha(0.0f);
+		fadeImage.CrossFadeAlpha(1.0f, 0.3f, false);
+		await Task.Delay(300);
+	}
 
-    public async Task FadeOut()
-    {
-        fadeImage.canvasRenderer.SetAlpha(1.0f);
-        fadeImage.CrossFadeAlpha(0.0f, 0.5f, false);
-        await Task.Delay(300);
-    }
+	public async Task FadeOut()
+	{
+		fadeImage.canvasRenderer.SetAlpha(1.0f);
+		fadeImage.CrossFadeAlpha(0.0f, 0.5f, false);
+		await Task.Delay(300);
+	}
 }

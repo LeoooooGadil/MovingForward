@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4801287666277475}
   - component: {fileID: 4801287666277472}
   - component: {fileID: 4801287666277474}
+  - component: {fileID: 5162833057565639268}
   m_Layer: 0
   m_Name: PlayerStatisticsManager
   m_TagString: Untagged
@@ -45,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec319510bda367458b6249d9057dcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  xpManager: {fileID: 0}
+  weeklyStatsManager: {fileID: 0}
 --- !u!114 &4801287666277474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,3 +66,18 @@ MonoBehaviour:
   experienceToNextLevel: 100
   _AddRandomExperience: 0
   _ResetExperience: 0
+--- !u!114 &5162833057565639268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4801287666277484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b099f4ed8e0af845b5e4e8f1b993cd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dailyTaskCompleted: 0
+  minigamesCompleted: 0
+  breathingExerciseCompleted: 0

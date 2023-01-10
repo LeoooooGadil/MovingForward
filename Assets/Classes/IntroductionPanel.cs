@@ -15,6 +15,8 @@ public class IntroductionPanel : MonoBehaviour
 
     public void FinishPanel(object data)
     {
+        // check if data is a bool
+        
         this.data = data;
         FinishPanel();
     }

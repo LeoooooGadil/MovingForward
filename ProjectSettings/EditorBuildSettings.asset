@@ -35,4 +35,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scenery/Work.unity
     guid: 96c339fa257647c489c9473c6da822d6
+  - enabled: 1
+    path: Assets/Scenes/DataScene.unity
+    guid: 03d625a9be2b3b24a91afd4558565eb7
+  - enabled: 1
+    path: Assets/Scenes/Minigames/BreathingGame.unity
+    guid: 9edbd90abb76a2a4b861b0ee7abe9454
   m_configObjects: {}

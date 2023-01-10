@@ -8,6 +8,7 @@ public class SceneryButton : MonoBehaviour
 {
 	TMP_Text sceneryName;
 	Button button;
+	Image image;
 	public Sprite buttonEnabledSprite;
 	public Sprite buttonDisabledSprite;
 	public Sprite buttonCurrentSprite;
@@ -23,22 +24,17 @@ public class SceneryButton : MonoBehaviour
 		sceneryName.text = sceneryNameString;
 
 		button = GetComponent<Button>();
+		image = GetComponent<Image>();
 		button.onClick.AddListener(async () => await sceneryController.setScenery(sceneryIndex));
 
 		if (isCurrentScenery)
 		{
-			button.spriteState = new SpriteState
-			{
-				disabledSprite = buttonEnabledSprite,
-			};
+			button.image.sprite = buttonDisabledSprite;
 			button.interactable = false;
 		}
 		else if (isLocked)
 		{
-			button.spriteState = new SpriteState
-			{
-				disabledSprite = buttonDisabledSprite,
-			};
+			button.image.sprite = buttonDisabledSprite;
 			button.interactable = false;
 		}
 		else

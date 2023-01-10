@@ -19,7 +19,7 @@ public class ChooseYourNameController : IntroductionPanel
 
         acceptButton.onClick.AddListener(() =>
         {
-            successText.text = "Hello " + playerName + "!";
+            successText.text = "Hello, " + playerName + "!";
             FinishPanel(playerName);
         });
     }

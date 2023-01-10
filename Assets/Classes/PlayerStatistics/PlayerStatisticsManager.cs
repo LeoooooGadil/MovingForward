@@ -7,6 +7,8 @@ public class PlayerStatisticsManager : MonoBehaviour
 	public static PlayerStatisticsManager instance;
 	[HideInInspector]
     public ExperienceManager xpManager;
+	[HideInInspector]
+	public WeeklyStatsManager weeklyStatsManager;
 
 	void Awake()
 	{
@@ -23,5 +25,6 @@ public class PlayerStatisticsManager : MonoBehaviour
 
     void Start() {
         xpManager = GetComponent<ExperienceManager>();
+		weeklyStatsManager = GetComponent<WeeklyStatsManager>();
     }
 }

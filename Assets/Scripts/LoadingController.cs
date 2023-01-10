@@ -32,14 +32,14 @@ public class LoadingController : MonoBehaviour
 		fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
 		fadeImage.canvasRenderer.SetAlpha(0.0f);
 		fadeImage.CrossFadeAlpha(1.0f, 0.3f, false);
-		await Task.Delay(300);
+		await Task.Delay(400);
 	}
 
 	public async Task FadeOut()
 	{
 		fadeImage.canvasRenderer.SetAlpha(1.0f);
 		fadeImage.CrossFadeAlpha(0.0f, 0.5f, false);
-		await Task.Delay(300);
+		await Task.Delay(400);
 		fadeImage.raycastTarget = false;
 	}
 }

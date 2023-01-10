@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8568267909970058597}
   - component: {fileID: 6872502841249056574}
   - component: {fileID: 1122820788163823128}
+  - component: {fileID: 1550749750121134304}
   m_Layer: 5
   m_Name: AddNewEventButton
   m_TagString: Untagged
@@ -69,9 +70,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3ec46a1ca6dad0f498e53739d39322d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 16e88f0bcd95fb4429f8203ec8c63937, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -98,7 +99,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 3
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -108,10 +109,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 3ec46a1ca6dad0f498e53739d39322d3, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: e01ebe45103044f4ba87f00f3d99d2f9, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 3ec46a1ca6dad0f498e53739d39322d3, type: 3}
-    m_DisabledSprite: {fileID: 21300000, guid: 3ec46a1ca6dad0f498e53739d39322d3, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: bc668ee616174a446b7e7504be81349b, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: a54c88096945945499f391b8bc5bdb24, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: bc668ee616174a446b7e7504be81349b, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: bc668ee616174a446b7e7504be81349b, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -151,3 +152,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_AspectMode: 1
   m_AspectRatio: 5.125
+--- !u!95 &1550749750121134304
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8568267909970058599}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1c26fa9476d1f40478a6b43edddb8f8f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

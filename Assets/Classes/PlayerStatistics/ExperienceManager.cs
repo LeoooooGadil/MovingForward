@@ -10,6 +10,8 @@ public class ExperienceManager : MonoBehaviour
 	public float experienceToNextLevelMultiplier = .3f;
 	public float experienceToNextLevel = 100;
 
+	public TMP_Text levelText;
+
     [InspectorButton("AddRandomExperience")]
     public bool _AddRandomExperience = false;
 
@@ -33,13 +35,24 @@ public class ExperienceManager : MonoBehaviour
 		calculateExperienceToNextLevel();
 	}
 
+	public void Update()
+	{
+		if(levelText != null)
+			levelText.text = currentLevel.ToString();
+	}
+
     public void SavePlayerProfile()
     {
-        PlayerProfile profile = new PlayerProfile();
-        profile.playerLevel = currentLevel;
-        profile.playerExp = currentExperience;
+        PlayerProfileData data = SaveSystem.LoadPlayerProfile();
+		if (data != null)
+		{
+			PlayerProfile profile = new PlayerProfile(data);
 
-        SaveSystem.SavePlayerProfile(profile);
+			profile.playerLevel = currentLevel;
+			profile.playerExp = currentExperience;
+
+			SaveSystem.SavePlayerProfile(profile);
+		}
     }
 
 	public void calculateExperienceToNextLevel()

@@ -9,30 +9,36 @@ using UnityEngine.UI;
 public class InhalerController : MonoBehaviour
 {
     public TMP_Text inhalerText;
-    public Image[] inhalerOuterCircles = new Image[4];
+    public Transform[] inhalerOuterCircles = new Transform[4];
     public float currentTimer = 0f;
     public float maxTimerWhenInhaling = 3f;
     public float maxTimerWhenExhaling = 3f;
+    public float maxTimerWhenWaiting = 3f;
     public bool isExhaling = false;
     public int inhaleCount = 0;
-    
-    // a certain rate in float that determins how much the outer circle should grow
-    public float outerCircleGrowthRate = 0.1f;
+    public int exhaleCount = 0;
+    public int howmanyTimesToBreath = 3;
 
     public Image inhalerPanel;
     public Button inhalerButton;
 
-    public bool isStarted = false;
+    // 0 = nothing
+    // 1 = inhale
+    // 2 = wait
+    // 3 = exhale
+    // 4 = wait
+    public int state = 0;
 
     void Start()
     {
-        SetInhalerText("Inhaler");
+        SetInhalerText("Inhale");
         inhalerButton.onClick.AddListener(StartInhaler);
+        makeOuterCircleAlpha();
     }
 
     public void StartInhaler() {
-        isStarted = true;
         inhalerPanel.gameObject.SetActive(false);
+        state = 1;
     }
 
     public void SetInhalerText(string text)
@@ -40,40 +46,109 @@ public class InhalerController : MonoBehaviour
         inhalerText.text = text;
     }
 
+    public void makeOuterCircleAlpha() {
+        // make the outer circle alpha based on the index
+        // make the scale of the circle smaller based on the maxTimerWhenExhaling and the percentage of 3
+
+        float maxAlpha = 1f;
+        float denominator = maxAlpha / inhalerOuterCircles.Length;
+
+        for (int i = 0; i < inhalerOuterCircles.Length; i++) {
+            Color color = inhalerOuterCircles[i].GetComponent<Image>().color;
+            color.a = maxAlpha - (denominator * i);
+            inhalerOuterCircles[i].GetComponent<Image>().color = color;
+        }
+    }
+
     public void makeOuterCircleBigger() {
         // make the outer circle bigger based on the index
-        for (int i = 0; i < inhaleCount; i++) {
-            inhalerOuterCircles[i].transform.localScale += new Vector3(outerCircleGrowthRate + i, outerCircleGrowthRate + i, 0f);
+        // make the scale of the circle bigger based on the maxTimerWhenInhaling and the percentage of 3
+        float outerCircleGrowthRate = 0.01f / maxTimerWhenInhaling;
+        // a float which determines how fast each circle grows
+
+
+        // for each circle, make it bigger at a different rate
+
+
+        for (int i = 0; i < inhalerOuterCircles.Length; i++) {
+            float percentage = (i + 1) / (float)inhalerOuterCircles.Length;
+            inhalerOuterCircles[i].localScale += new Vector3(outerCircleGrowthRate * percentage, outerCircleGrowthRate * percentage, 0f);
         }
     }
 
     public void makeOuterCircleSmaller() {
         // make the outer circle smaller based on the index
-        for (int i = 0; i < inhaleCount; i++) {
-            inhalerOuterCircles[i].transform.localScale -= new Vector3(outerCircleGrowthRate + i, outerCircleGrowthRate + i, 0f);
+        // make the scale of the circle smaller based on the maxTimerWhenExhaling and the percentage of 3
+
+        float outerCircleGrowthRate = 0.01f / maxTimerWhenExhaling;    
+        for (int i = 0; i < inhalerOuterCircles.Length; i++) {
+            float percentage = (i + 1) / (float)inhalerOuterCircles.Length;
+
+            if(inhalerOuterCircles[i].localScale.x <= 0f) continue;
+
+            inhalerOuterCircles[i].localScale -= new Vector3(outerCircleGrowthRate * percentage, outerCircleGrowthRate * percentage, 0f);
         }
     }
 
     void Update() {
-        if (!isStarted) return;
+        if(exhaleCount >= howmanyTimesToBreath && inhaleCount >= howmanyTimesToBreath) {
+            // end the game
+            // show the end panel
+            // show the score
+            // show the button to go back to the main menu
 
-        if (isExhaling) {
-            currentTimer += Time.deltaTime;
-            if (currentTimer >= maxTimerWhenExhaling) {
-                isExhaling = false;
-                currentTimer = 0f;
-                SetInhalerText("Inhale");
+            state = 0;
+            inhalerPanel.gameObject.SetActive(true);
+            return;
+        }
+
+        switch(state) {
+            case 0:
+                // nothing
+                break;
+            case 1:
+                // inhale
+                currentTimer += Time.deltaTime;
                 makeOuterCircleBigger();
-            }
-        } else {
-            currentTimer += Time.deltaTime;
-            if (currentTimer >= maxTimerWhenInhaling) {
-                isExhaling = true;
-                currentTimer = 0f;
-                SetInhalerText("Exhale");
-                inhaleCount++;
+                if (currentTimer >= maxTimerWhenInhaling) {
+                    state = 2;
+                    currentTimer = 0f;
+                    SetInhalerText("Hold");
+                    inhaleCount++;
+                }
+                break;
+            case 2:
+                // wait
+                currentTimer += Time.deltaTime;
+                // makeOuterCircleSmaller();
+                if (currentTimer >= maxTimerWhenWaiting) {
+                    state = 3;
+                    currentTimer = 0f;
+                    SetInhalerText("Exhale");
+                }
+                break;
+            case 3:
+                // exhale
+                currentTimer += Time.deltaTime;
                 makeOuterCircleSmaller();
-            }
+                if (currentTimer >= maxTimerWhenExhaling) {
+                    state = 4;
+                    currentTimer = 0f;
+                    SetInhalerText("Hold");
+                    exhaleCount++;
+                }
+                break;
+            case 4:
+                // wait
+                currentTimer += Time.deltaTime;
+                // makeOuterCircleSmaller();
+                if (currentTimer >= maxTimerWhenWaiting) {
+                    state = 1;
+                    currentTimer = 0f;
+                    SetInhalerText("Inhale");
+                }
+                break;
+
         }
     }
 }
